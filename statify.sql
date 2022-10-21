@@ -382,7 +382,8 @@ CREATE TABLE `users` (
   `first_name` varchar(15) NOT NULL,
   `last_name` varchar(15) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `spotify_username` varchar(30) NOT NULL
+  `spotify_username` varchar(30) NOT NULL,
+  CONSTRAINT validEmail CHECK (`email` LIKE '_%@_%._%') 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -464,6 +465,325 @@ ALTER TABLE `users`
   MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
+DELIMITER $$
+CREATE PROCEDURE maxDurationAlbum(IN albumName varchar(50))
+SELECT S.name, A.maxStat
+FROM song AS S,
+	(SELECT name, MAX(song.duration) AS maxStat
+	FROM album NATURAL JOIN part_of NATURAL JOIN song
+	WHERE album_name = albumName) as A
+WHERE S.duration = A.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minDurationAlbum(IN albumName varchar(50))
+SELECT S.name, A.minStat
+FROM song AS S,
+	(SELECT name, MIN(song.duration) AS minStat
+	FROM Album NATURAL JOIN Part_of NATURAL JOIN Song
+	WHERE album_name = albumName) as A
+WHERE S.duration = A.minStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE maxDurationPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.maxStat
+FROM song AS S,
+    (SELECT name, MAX(song.duration) AS maxStat
+    FROM playlist NATURAL JOIN contains NATURAL JOIN song
+    WHERE playlist_name = playlistName) as P
+WHERE S.duration = P.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minDurationPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.minStat
+FROM song AS S,
+  (SELECT name, MIN(song.duration) AS minStat
+  FROM playlist NATURAL JOIN contains NATURAL JOIN song
+  WHERE playlist_name = playlistName) as P
+WHERE S.duration = P.minStat;
+$$
+DELIMITER ;
+
+-- instrumentalness --
+
+DELIMITER $$
+CREATE PROCEDURE maxInstrumentalnessAlbum(IN albumName varchar(50))
+SELECT S.name, A.maxStat
+FROM song AS S,
+	(SELECT name, MAX(song.instrumentalness) AS maxStat
+	FROM album NATURAL JOIN part_of NATURAL JOIN song
+	WHERE album_name = albumName) as A
+WHERE S.instrumentalness = A.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minInstrumentalnessAlbum(IN albumName varchar(50))
+SELECT S.name, A.minStat
+FROM song AS S,
+	(SELECT name, MIN(song.instrumentalness) AS minStat
+	FROM Album NATURAL JOIN Part_of NATURAL JOIN Song
+	WHERE album_name = albumName) as A
+WHERE S.instrumentalness = A.minStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE maxInstrumentalnessPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.maxStat
+FROM song AS S,
+    (SELECT name, MAX(song.instrumentalness) AS maxStat
+    FROM playlist NATURAL JOIN contains NATURAL JOIN song
+    WHERE playlist_name = playlistName) as P
+WHERE S.instrumentalness = P.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minInstrumentalnessPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.minStat
+FROM song AS S,
+  (SELECT name, MIN(song.instrumentalness) AS minStat
+  FROM playlist NATURAL JOIN contains NATURAL JOIN song
+  WHERE playlist_name = playlistName) as P
+WHERE S.instrumentalness = P.minStat;
+$$
+DELIMITER ;
+
+-- loudness --
+
+DELIMITER $$
+CREATE PROCEDURE maxLoudnessAlbum(IN albumName varchar(50))
+SELECT S.name, A.maxStat
+FROM song AS S,
+	(SELECT name, MAX(song.loudness) AS maxStat
+	FROM album NATURAL JOIN part_of NATURAL JOIN song
+	WHERE album_name = albumName) as A
+WHERE S.loudness = A.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minLoudnessAlbum(IN albumName varchar(50))
+SELECT S.name, A.minStat
+FROM song AS S,
+	(SELECT name, MIN(song.loudness) AS minStat
+	FROM Album NATURAL JOIN Part_of NATURAL JOIN Song
+	WHERE album_name = albumName) as A
+WHERE S.loudness = A.minStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE maxLoudnessPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.maxStat
+FROM song AS S,
+    (SELECT name, MAX(song.loudness) AS maxStat
+    FROM playlist NATURAL JOIN contains NATURAL JOIN song
+    WHERE playlist_name = playlistName) as P
+WHERE S.loudness = P.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minLoudnessPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.minStat
+FROM song AS S,
+  (SELECT name, MIN(song.loudness) AS minStat
+  FROM playlist NATURAL JOIN contains NATURAL JOIN song
+  WHERE playlist_name = playlistName) as P
+WHERE S.loudness = P.minStat;
+$$
+DELIMITER ;
+
+-- danceability --
+
+DELIMITER $$
+CREATE PROCEDURE maxDanceabilityAlbum(IN albumName varchar(50))
+SELECT S.name, A.maxStat
+FROM song AS S,
+	(SELECT name, MAX(song.danceability) AS maxStat
+	FROM album NATURAL JOIN part_of NATURAL JOIN song
+	WHERE album_name = albumName) as A
+WHERE S.danceability = A.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minDanceabilityAlbum(IN albumName varchar(50))
+SELECT S.name, A.minStat
+FROM song AS S,
+	(SELECT name, MIN(song.danceability) AS minStat
+	FROM Album NATURAL JOIN Part_of NATURAL JOIN Song
+	WHERE album_name = albumName) as A
+WHERE S.danceability = A.minStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE maxDanceabilityPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.maxStat
+FROM song AS S,
+    (SELECT name, MAX(song.danceability) AS maxStat
+    FROM playlist NATURAL JOIN contains NATURAL JOIN song
+    WHERE playlist_name = playlistName) as P
+WHERE S.danceability = P.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minDanceabilityPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.minStat
+FROM song AS S,
+  (SELECT name, MIN(song.danceability) AS minStat
+  FROM playlist NATURAL JOIN contains NATURAL JOIN song
+  WHERE playlist_name = playlistName) as P
+WHERE S.danceability = P.minStat;
+$$
+DELIMITER ;
+
+-- tempo --
+
+DELIMITER $$
+CREATE PROCEDURE maxTempoAlbum(IN albumName varchar(50))
+SELECT S.name, A.maxStat
+FROM song AS S,
+	(SELECT name, MAX(song.tempo) AS maxStat
+	FROM album NATURAL JOIN part_of NATURAL JOIN song
+	WHERE album_name = albumName) as A
+WHERE S.tempo = A.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minTempoAlbum(IN albumName varchar(50))
+SELECT S.name, A.minStat
+FROM song AS S,
+	(SELECT name, MIN(song.tempo) AS minStat
+	FROM Album NATURAL JOIN Part_of NATURAL JOIN Song
+	WHERE album_name = albumName) as A
+WHERE S.tempo = A.minStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE maxTempoPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.maxStat
+FROM song AS S,
+    (SELECT name, MAX(song.tempo) AS maxStat
+    FROM playlist NATURAL JOIN contains NATURAL JOIN song
+    WHERE playlist_name = playlistName) as P
+WHERE S.tempo = P.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minTempoPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.minStat
+FROM song AS S,
+  (SELECT name, MIN(song.tempo) AS minStat
+  FROM playlist NATURAL JOIN contains NATURAL JOIN song
+  WHERE playlist_name = playlistName) as P
+WHERE S.tempo = P.minStat;
+$$
+DELIMITER ;
+
+-- energy --
+
+DELIMITER $$
+CREATE PROCEDURE maxEnergyAlbum(IN albumName varchar(50))
+SELECT S.name, A.maxStat
+FROM song AS S,
+	(SELECT name, MAX(song.energy) AS maxStat
+	FROM album NATURAL JOIN part_of NATURAL JOIN song
+	WHERE album_name = albumName) as A
+WHERE S.energy = A.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minEnergyAlbum(IN albumName varchar(50))
+SELECT S.name, A.minStat
+FROM song AS S,
+	(SELECT name, MIN(song.energy) AS minStat
+	FROM Album NATURAL JOIN Part_of NATURAL JOIN Song
+	WHERE album_name = albumName) as A
+WHERE S.energy = A.minStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE maxEnergyPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.maxStat
+FROM song AS S,
+    (SELECT name, MAX(song.energy) AS maxStat
+    FROM playlist NATURAL JOIN contains NATURAL JOIN song
+    WHERE playlist_name = playlistName) as P
+WHERE S.energy = P.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minEnergyPlaylist(IN playlistName varchar(50))
+SELECT S.name, P.minStat
+FROM song AS S,
+  (SELECT name, MIN(song.energy) AS minStat
+  FROM playlist NATURAL JOIN contains NATURAL JOIN song
+  WHERE playlist_name = playlistName) as P
+WHERE S.energy = P.minStat;
+$$
+DELIMITER ;
+
+-- valence --
+
+DELIMITER $$
+CREATE PROCEDURE maxDValenceAlbum(IN albumName varchar(50))
+SELECT S.name, A.maxStat
+FROM song AS S,
+	(SELECT name, MAX(song.valence) AS maxStat
+	FROM album NATURAL JOIN part_of NATURAL JOIN song
+	WHERE album_name = albumName) as A
+WHERE S.valence = A.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minValenceAlbum(IN albumName varchar(50))
+SELECT S.name, A.minStat
+FROM song AS S,
+	(SELECT name, MIN(song.valence) AS minStat
+	FROM Album NATURAL JOIN Part_of NATURAL JOIN Song
+	WHERE album_name = albumName) as A
+WHERE S.valence = A.minStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE maxValencePlaylist(IN playlistName varchar(50))
+SELECT S.name, P.maxStat
+FROM song AS S,
+    (SELECT name, MAX(song.valence) AS maxStat
+    FROM playlist NATURAL JOIN contains NATURAL JOIN song
+    WHERE playlist_name = playlistName) as P
+WHERE S.valence = P.maxStat;
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE minValencePlaylist(IN playlistName varchar(50))
+SELECT S.name, P.minStat
+FROM song AS S,
+  (SELECT name, MIN(song.valence) AS minStat
+  FROM playlist NATURAL JOIN contains NATURAL JOIN song
+  WHERE playlist_name = playlistName) as P
+WHERE S.valence = P.minStat;
+$$
+DELIMITER ;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
