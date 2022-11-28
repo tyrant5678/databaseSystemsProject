@@ -1,3 +1,5 @@
+<!-- example form from friend book potd -->
+
 <?php
 require("connect-db.php");      // include("connect-db.php");
 require("friend-db.php");

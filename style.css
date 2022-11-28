@@ -42,6 +42,8 @@ h2 {
 
     margin-bottom: 40px;
 
+    color: white;
+
 }
 
 input {
@@ -143,3 +145,43 @@ a:hover{
     opacity: .7;
 
 }
+
+nav {
+    position: fixed;
+    top: 0px;
+    width:100%;
+
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(85, 54, 54);
+    z-index: 1000;
+  }
+
+#mainMenu ul {
+    list-style-type: none;
+}
+
+#mainMenu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgb(85, 54, 54);
+  }
+  
+#mainMenu li {
+    float: left;
+  }
+  
+footer {
+    position: fixed;
+    bottom: 0px;
+    width:100%;
+    text-align: center;
+    margin: 0;
+    padding: 12px;
+    overflow: hidden;
+    background-color: rgb(85, 54, 54);
+    z-index: 1000;
+  }

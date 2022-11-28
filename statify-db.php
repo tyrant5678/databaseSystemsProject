@@ -1,3 +1,4 @@
+<!-- example functions from friend book potd -->
 <?php
 function addFriend($name, $major, $year)
 {
