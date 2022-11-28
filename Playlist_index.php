@@ -48,7 +48,7 @@
 </head>
 <body>
 	<form method="POST">
-	        // need to add an "Add playlist/Delete playlist functionality"
+	        
 		<label>Name of Playlist:</label>
 		<input type="text" name="playlist_name" required><br>
 		<label>Select a Playlist</label>
