@@ -1,5 +1,9 @@
 <?php 
 require("connect-db.php");
+
+    $song_sql = "SELECT * FROM `song`";
+    $songs= $conn->query($song_sql);
+    
 if (isset($_GET['playlist_id'])) {
     $playlist_id = $_GET['playlist_id'];
 } else {
@@ -19,7 +23,20 @@ if (isset($_GET['playlist_id'])) {
 </head>
 <body>
     <form action="Playlist_index2.php" method="post">
-        <label for="song_name">Enter Song Name to Add</label>
+     <h3>Add Song:</h3>
+      Available Songs:
+      <select name="Song">
+       <option value="none">
+        <?php echo "";?>
+       </option>
+      <?php foreach ($songs as $song): ?>
+        <option value="<?php echo $song["name"]; ?>">
+      <?php echo $song["name"]; ?>
+      </option>
+      <?php endforeach; ?>
+      </select>
+    
+        <label for="song_name">Type Song from List to Add</label>
         <input type="text" name="song_name" id="song_name"/>
         <input type="submit" name="add_song_result" value="Add This Song">
         <input type="hidden" name="playlist_id" value="<?php echo "{$playlist_id}"?>"/>
