@@ -8,17 +8,17 @@ body {
 
     top: 0px;
 
-    margin-top: 82vh;
+    margin-top: 5vh;
 
     bottom: 0px;
 
-    margin-bottom: 86vh;
+    margin-bottom: 5vh;
 
     justify-content: center;
 
     align-items: center;
 
-    height: 100vh;
+    /* height: 100vh; */
 
     flex-direction: column;
 
@@ -39,7 +39,7 @@ form {
     width: 1000px;
 
     margin-top: 10px;
-    
+
     border: 3px solid rgb(177, 142, 142);
 
     padding: 20px;
