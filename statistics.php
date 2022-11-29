@@ -1,32 +1,34 @@
 <?php
-	// Connect to database
-	$con = mysqli_connect("localhost","root","","statify", 3307);
-	
-	if (!$con) {
+    require("connect-db.php");
+    require("stats.php");
+?>
 
-   	 echo "Connection failed!";
+<?php
+    global $conn;
+    $query = "SELECT * FROM album";  
+    try {
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();   // fetch()
+        $statement->closeCursor();
+        echo $result;
+    }
+    catch (PDOException $e) 
+    {
+        echo $e->getMessage();
+        if there is a specific SQL-related error message
+           echo "generic message (don't reveal SQL-specific message)";
 
-	}
+        if (str_contains($e->getMessage(), "Duplicate"))
+		   echo "Failed to add a friend <br/>";
 
-    $sql_album = "SELECT * FROM `album`";
-    $all_albums = mysqli_query($con,$sql_album);
-	
-
-    if(isset($_POST['stats']))
-	{		
-		$name = mysqli_real_escape_string($con,$_POST['playlist_name']);
-
-		$sql_insert =
-		"INSERT INTO `playlist`(`playlist_name`)
-			VALUES ('$name')";
-
-		if(mysqli_query($con,$sql_insert))
-		{
-			echo '<script>alert("Playlist added successfully")</script>';
-		}
-	}
-
-
+        if ($statement->rowCount() == 0)
+            echo "Failed to add a friend <br/>";
+    }
+    catch (Exception $e)
+    {
+        echo $e->getMessage();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -52,27 +54,14 @@
 <form name="statisticsForm" action="statistics.php" method="post">   
 
 <h3>Get Average Statistics by:</h3>
-    <!-- Album:  
-    <select Statistics For='NEW'>  
-    <option value="">--- Select ---</option>  
-    
-    </select>  
-    <input type="submit" name="stats" value="Get Statistics" class="btn btn-primary" /> 
+    Album:
 
-    <?php
-        $sql_album = "SELECT * FROM `album`";
-        $all_albums = mysqli_query($con,$sql_album);
+    <!-- <?php foreach ($list_of_playlists as $playlist_info): ?>
+    <tr>
+        <td><?php echo $friend_info['name']; ?></td>
+    </tr>
+    <?php endforeach; ?> -->
 
-        echo "<select name='album'>";
-        while ($row = mysql_fetch_array($all_albums)) {
-            echo "<option value='" . $row['album_name'] . "'>" . $row['album_name'] . "</option>";
-        }
-        echo "</select>";
-    ?> -->
-
-    <?php
-        echo $all_albums
-    ?>
 </form>
 
 <hr/>
