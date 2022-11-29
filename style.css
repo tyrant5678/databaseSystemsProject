@@ -8,9 +8,17 @@ body {
 
     align-items: center;
 
-    height: 100vh;
-
     flex-direction: column;
+
+    position: relative;
+
+    top: 0px;
+
+    margin-top: 7vh;
+
+    bottom: 0px;
+
+    margin-bottom: 5vh;
 
 }
 
@@ -24,7 +32,11 @@ body {
 
 form {
 
+    outline: 10px solid #1DB954;
+    
     width: 1000px;
+
+    margin-top: 2%;
 
     border: 3px solid lightgrey;
 
@@ -114,6 +126,7 @@ button:hover{
 
 .song {
     text-align: center;
+    display: inline-block;
     color: white;
 }
 
