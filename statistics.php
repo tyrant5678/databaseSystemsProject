@@ -2,13 +2,13 @@
     require("connect-db.php");
 
     $album_sql = "SELECT * FROM `album`";
-    $albums = $con->query($album_sql);
+    $albums = $conn->query($album_sql);
 
     $artist_sql = "SELECT * FROM `artist`";
-    $artists = $con->query($artist_sql);
+    $artists = $conn->query($artist_sql);
 
     $playlist_sql = "SELECT * FROM `playlist`";
-    $playlists = $con->query($playlist_sql);
+    $playlists = $conn->query($playlist_sql);
 
     $stats = NULL;
     $averagestats = NULL;
@@ -18,20 +18,20 @@
     if(isset($_POST['albumstat']))
     {
         $stats = NULL;
-        $albumName = mysqli_real_escape_string($con,$_POST['Album']);
+        $albumName = mysqli_real_escape_string($conn,$_POST['Album']);
         $album_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence
          FROM `album` NATURAL JOIN `part_of` NATURAL JOIN `song` WHERE album_name = '$albumName'";
-        $stats = $con->query($album_stat_sql);
+        $stats = $conn->query($album_stat_sql);
     }
 
     if(isset($_POST['albumavg']))
     {
         $stats = NULL;
-        $albumName = mysqli_real_escape_string($con,$_POST['Album']);
+        $albumName = mysqli_real_escape_string($conn,$_POST['Album']);
         $album_avg_sql = "SELECT AVG(duration) as duration, AVG(instrumentalness) as instrumentalness, AVG(loudness) as loudness, 
          AVG(danceability) as danceability, AVG(tempo) as tempo, AVG(energy) as energy, AVG(song_key) as song_key, AVG(valence) as valence
          FROM `album` NATURAL JOIN `part_of` NATURAL JOIN `song` WHERE album_name = '$albumName'";
-        $stats = $con->query($album_avg_sql);  
+        $stats = $conn->query($album_avg_sql);  
     }
 ?>
 
@@ -39,22 +39,22 @@
     if(isset($_POST['artiststat']))
     {
         $stats = NULL;
-        $artistName = mysqli_real_escape_string($con,$_POST['Artist']);
+        $artistName = mysqli_real_escape_string($conn,$_POST['Artist']);
         $artist_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence
          FROM `artist` NATURAL JOIN `made` NATURAL JOIN `album` NATURAL JOIN `part_of` NATURAL JOIN `song` 
          WHERE artist_name = '$artistName'";
-        $stats = $con->query($artist_stat_sql);   
+        $stats = $conn->query($artist_stat_sql);   
     }
 
     if(isset($_POST['artistavg']))
     {
         $stats = NULL;
-        $artistName = mysqli_real_escape_string($con,$_POST['Artist']);
+        $artistName = mysqli_real_escape_string($conn,$_POST['Artist']);
         $artist_avg_sql = "SELECT AVG(duration) as duration, AVG(instrumentalness) as instrumentalness, AVG(loudness) as loudness, 
          AVG(danceability) as danceability, AVG(tempo) as tempo, AVG(energy) as energy, AVG(song_key) as song_key, AVG(valence) as valence
          FROM `artist` NATURAL JOIN `made` NATURAL JOIN `album` NATURAL JOIN `part_of` NATURAL JOIN `song` 
          WHERE artist_name = '$artistName'";
-        $stats = $con->query($artist_avg_sql);  
+        $stats = $conn->query($artist_avg_sql);  
     }
 ?>
 
@@ -62,25 +62,25 @@
     if(isset($_POST['playliststat']))
     {
         $stats = NULL;
-        $playlistName = mysqli_real_escape_string($con,$_POST['Playlist']);
+        $playlistName = mysqli_real_escape_string($conn,$_POST['Playlist']);
         $playlist_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence
          FROM `playlist` NATURAL JOIN `contains` NATURAL JOIN `song` WHERE playlist_name = '$playlistName'";
-        $stats = $con->query($playlist_stat_sql);   
+        $stats = $conn->query($playlist_stat_sql);   
 
         $averagestats = NULL;
         $playlist_avg_sql = "SELECT AVG(duration), AVG(instrumentalness), AVG(loudness), AVG(danceability), AVG(tempo), AVG(energy), AVG(song_key), AVG(valence)
          FROM `playlist` NATURAL JOIN `contains` NATURAL JOIN `song` WHERE playlist_name = '$playlistName'";
-        $averagestats = $con->query($playlist_avg_sql);
+        $averagestats = $conn->query($playlist_avg_sql);
     }
 
     if(isset($_POST['playlistavg']))
     {
         $stats = NULL;
-        $playlistName = mysqli_real_escape_string($con,$_POST['Playlist']);
+        $playlistName = mysqli_real_escape_string($conn,$_POST['Playlist']);
         $playlist_avg_sql = "SELECT AVG(duration) as duration, AVG(instrumentalness) as instrumentalness, AVG(loudness) as loudness, 
          AVG(danceability) as danceability, AVG(tempo) as tempo, AVG(energy) as energy, AVG(song_key) as song_key, AVG(valence) as valence
          FROM `playlist` NATURAL JOIN `contains` NATURAL JOIN `song` WHERE playlist_name = '$playlistName'";
-        $stats = $con->query($playlist_avg_sql);  
+        $stats = $conn->query($playlist_avg_sql);  
     }
 ?>
 
