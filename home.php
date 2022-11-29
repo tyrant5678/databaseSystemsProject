@@ -19,11 +19,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['username'])) {
 </head>
 
 <body>
+<?php include('header.html') ?> 
 
      <h1>Hello, <?php echo $_SESSION['name']; ?></h1>
 
      <a href="logout.php">Logout</a>
 
+     <?php include('footer.html') ?>     
 </body>
 
 </html>

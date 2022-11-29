@@ -16,7 +16,8 @@ if($stmt = $conn->prepare('SELECT userID, password FROM users WHERE username = ?
     }
     else {
         if($stmt = $conn->prepare('INSERT INTO users (first_name, last_name, username, password, email) VALUES (?, ?, ?, ?, ?)')) {
-            $stmt->bind_param('sssss', $_POST['first_name'], $_POST['last_name'], $_POST['username'], $_POST['password'], $_POST['email']);
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $stmt->bind_param('sssss', $_POST['first_name'], $_POST['last_name'], $_POST['username'], $password, $_POST['email']);
             $stmt->execute();
             echo 'Account Successfully Created';
             header("Location: index.php");

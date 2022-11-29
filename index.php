@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 <head>
 <body>
-    <?php include('header.html') ?> 
 
      <form action="login.php" method="post">
 
@@ -29,7 +28,7 @@
         <button type="submit">Login</button>
 
      </form>
-     
+     <a href="registration.php">Create a new user</a>
 <?php include('footer.html') ?>
 
 </body>

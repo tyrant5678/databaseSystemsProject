@@ -1,50 +1,36 @@
 body {
 
-    background: #91a716;
+    background: #191414;
 
     display: flex;
-
-    position: relative;
-
-    top: 0px;
-
-    margin-top: 5vh;
-
-    bottom: 0px;
-
-    margin-bottom: 5vh;
 
     justify-content: center;
 
     align-items: center;
 
-    /* height: 100vh; */
+    height: 100vh;
 
     flex-direction: column;
 
-    top: 20px;
 }
 
 *{
 
-    font-family: cursive;
+    font-family: Arial, Helvetica, sans-serif;
 
     box-sizing: padding-box;
 
 }
 
 form {
-    outline: 10px solid #91a716;
 
     width: 1000px;
 
-    margin-top: 10px;
-
-    border: 3px solid rgb(177, 142, 142);
+    border: 3px solid lightgrey;
 
     padding: 20px;
 
-    background: rgb(85, 54, 54);
+    background: grey;
 
     border-radius: 20px;
 
@@ -78,7 +64,7 @@ input {
 
 label {
 
-    color: #888;
+    color: white;
 
     font-size: 18px;
 
@@ -114,7 +100,7 @@ button:hover{
 
    background: #F2DEDE;
 
-   color: #0c0101;
+   color: white;
 
    padding: 10px;
 
@@ -128,7 +114,6 @@ button:hover{
 
 .song {
     text-align: center;
-    display: inline-block;
     color: white;
 }
 
@@ -136,7 +121,7 @@ h1 {
 
     text-align: center;
 
-    color: rgb(134, 3, 3);
+    color: white;
 
 }
 
@@ -174,7 +159,7 @@ nav {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(85, 54, 54);
+    background-color: #1DB954;
     z-index: 1000;
   }
 
@@ -187,7 +172,7 @@ nav {
     color: white;
     text-align: center;
     text-decoration: none;
-    background-color: rgb(85, 54, 54);
+    background-color: #1DB954;
   }
   
 #mainMenu li {
@@ -202,6 +187,6 @@ footer {
     margin: 0;
     padding: 12px;
     overflow: hidden;
-    background-color: rgb(85, 54, 54);
+    background-color: #1DB954;
     z-index: 1000;
   }
