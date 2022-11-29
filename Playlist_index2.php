@@ -1,9 +1,10 @@
 <?php
 
 	// Connect to database (can put in db-connect file)
-	$con = mysqli_connect("localhost","root","","statify", 3307);
+	require("connect-db.php");
+	global $conn;
 	
-	if (!$con) {
+	if (!$conn) {
 
    	 echo "Connection failed!";
 
@@ -11,18 +12,17 @@
 	
 	// specific function file
 	$sql = "SELECT * FROM `playlist`";
-	$all_playlists = mysqli_query($con,$sql);
-
+	$all_playlists = mysqli_query($conn,$sql);
 	if(isset($_POST['add']))
 	{
 		
-		$name = mysqli_real_escape_string($con,$_POST['playlist_name']);
+		$name = mysqli_real_escape_string($conn,$_POST['playlist_name']);
 
 		$sql_insert =
 		"INSERT INTO `playlist`(`playlist_name`)
 			VALUES ('$name')";
 
-		if(mysqli_query($con,$sql_insert))
+		if(mysqli_query($conn,$sql_insert))
 		{
 			echo '<script>alert("Playlist added successfully")</script>';
 		}
@@ -36,7 +36,7 @@
 		$sql_delete =
 		"DELETE FROM `playlist` WHERE `playlist`.`playlistID` = '$id'";
 
-		if(mysqli_query($con,$sql_delete))
+		if(mysqli_query($conn,$sql_delete))
 		{
 			echo '<script>alert("Playlist deleted successfully")</script>';
 		}
@@ -58,11 +58,22 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-
 <?php foreach ($all_playlists as $playlist_info): ?>
-  <tr>
+	<?php
+	$playlist_id = $playlist_info['playlistID'];
+	$songs_query = "SELECT * 
+					FROM artist NATURAL JOIN made NATURAL JOIN album NATURAL JOIN part_of NATURAL JOIN song NATURAL JOIN contains
+					WHERE playlistID={$playlist_id}";
+	$playlist_songs = mysqli_query($conn, $songs_query);
+	?>
+	<tr>
      <form action="Playlist_index2.php" method="post">
-       <td><?php echo $playlist_info['playlist_name']; ?></td>                 
+       <td><?php echo $playlist_info['playlist_name']; ?></td>
+	   <?php
+	   foreach ($playlist_songs as $song) { 
+		echo("<p class=\"song\">{$song['name']} - {$song['artist_name']}</p>");
+	   }
+	   ?>   
        <td>
         <form action="Playlist_index2.php" method="post">
 
