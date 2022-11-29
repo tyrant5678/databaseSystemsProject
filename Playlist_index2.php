@@ -23,6 +23,7 @@ if (isset($_POST['add'])) {
 	if (mysqli_query($conn, $sql_insert)) {
 		echo '<script>alert("Playlist added successfully")</script>';
 	}
+	unset($_POST['add']);
 }
 // redirect to add_songs page if we've got the form
 if (isset($_POST['add_songs'])) {
@@ -44,19 +45,21 @@ if (isset($_POST['add_song_result'])) {
 	} catch (PDOException $e){
 		echo("<script>alert(\"Error adding song to playlist! Please try again.\");</script>");
 	}
+	unset($_POST['add_song_result']);
 	
 }
 // delete songs
 if (isset($_POST['delete_song'])) {
 	$delete_song_query = "DELETE FROM contains WHERE playlistID=\"{$_POST['playlist_id']}\" and songID=\"{$_POST['delete_song']}\"";
-	print_r($_POST);
 	echo($delete_song_query);
 	$delete_song_res = mysqli_query($conn, $delete_song_query);
 	try {
 		mysqli_query($conn, $delete_song_query);
+		echo("<script>alert(\"Successfully deleted song from playlist!\");</script>");
 	}catch (PDOException $e) {
-		$delete_song_query = NULL;
+		echo("<script>alert(\"Error deleting song from playlist, try again later.\");</script>");
 	}
+	unset($_POST['delete_song']);
 }
 
 if (isset($_POST['delete'])) {
@@ -71,7 +74,6 @@ if (isset($_POST['delete'])) {
 	}
 }
 ?>
-// below can be put in index file
 
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +98,6 @@ if (isset($_POST['delete'])) {
 					WHERE playlistID={$playlist_id}";
 		$playlist_songs = mysqli_query($conn, $songs_query);
 		?>
-		<tr>
 			<form action="Playlist_index2.php" method="post">
 				<td><?php echo $playlist_info['playlist_name']; ?></td>
 				<td>
@@ -120,7 +121,7 @@ if (isset($_POST['delete'])) {
 				</td>
 			</form>
 		</tr>
-	<?php endforeach; print_r($_POST);?>
+	<?php endforeach;?>
 
 	<form method="POST">
 
@@ -130,14 +131,7 @@ if (isset($_POST['delete'])) {
 		<input type="submit" value="Add" name="add">
 	</form>
 	<br>
-	<?php if (isset($delete_song_res)) {
-		echo("<script>alert(\"Successfully deleted song from playlist!\");</script>");
-	} else {
-		echo("<script>alert(\"Error deleting song from playlist, try again later.\");</script>");
-	}
-	?>
 	<?php include('footer.html') ?>
-
 </body>
 
 </html>

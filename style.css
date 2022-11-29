@@ -4,6 +4,16 @@ body {
 
     display: flex;
 
+    position: relative;
+
+    top: 0px;
+
+    margin-top: 82vh;
+
+    bottom: 0px;
+
+    margin-bottom: 86vh;
+
     justify-content: center;
 
     align-items: center;
@@ -12,6 +22,7 @@ body {
 
     flex-direction: column;
 
+    top: 20px;
 }
 
 *{
@@ -23,9 +34,12 @@ body {
 }
 
 form {
+    outline: 10px solid #91a716;
 
     width: 1000px;
 
+    margin-top: 10px;
+    
     border: 3px solid rgb(177, 142, 142);
 
     padding: 20px;
@@ -114,6 +128,7 @@ button:hover{
 
 .song {
     text-align: center;
+    display: inline-block;
     color: white;
 }
 

@@ -2,13 +2,13 @@
     require("connect-db.php");
 
     $album_sql = "SELECT * FROM `album`";
-    $albums = $con->query($album_sql);
+    $albums = $conn->query($album_sql);
 
     $artist_sql = "SELECT * FROM `artist`";
-    $artists = $con->query($artist_sql);
+    $artists = $conn->query($artist_sql);
 
     $playlist_sql = "SELECT * FROM `playlist`";
-    $playlists = $con->query($playlist_sql);
+    $playlists = $conn->query($playlist_sql);
 
     $stats = NULL;
 ?>
@@ -17,10 +17,10 @@
     if(isset($_POST['albumstat']))
     {
         $stats = NULL;
-        $albumName = mysqli_real_escape_string($con,$_POST['Album']);
+        $albumName = mysqli_real_escape_string($conn,$_POST['Album']);
         $album_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence
          FROM `album` NATURAL JOIN `part_of` NATURAL JOIN `song` WHERE album_name = '$albumName'";
-        $stats = $con->query($album_stat_sql);   
+        $stats = $conn->query($album_stat_sql);   
     }
 ?>
 
@@ -28,11 +28,11 @@
     if(isset($_POST['artiststat']))
     {
         $stats = NULL;
-        $artistName = mysqli_real_escape_string($con,$_POST['Artist']);
+        $artistName = mysqli_real_escape_string($conn,$_POST['Artist']);
         $artist_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence
          FROM `artist` NATURAL JOIN `made` NATURAL JOIN `album` NATURAL JOIN `part_of` NATURAL JOIN `song` 
          WHERE artist_name = '$artistName'";
-        $stats = $con->query($artist_stat_sql);   
+        $stats = $conn->query($artist_stat_sql);   
     }
 ?>
 
@@ -40,10 +40,10 @@
     if(isset($_POST['playliststat']))
     {
         $stats = NULL;
-        $playlistName = mysqli_real_escape_string($con,$_POST['Playlist']);
+        $playlistName = mysqli_real_escape_string($conn,$_POST['Playlist']);
         $playlist_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence
          FROM `playlist` NATURAL JOIN `contains` NATURAL JOIN `song` WHERE playlist_name = '$playlistName'";
-        $stats = $con->query($playlist_stat_sql);   
+        $stats = $conn->query($playlist_stat_sql);   
     }
 ?>
 
@@ -55,7 +55,7 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0">
 
-	<!-- <?php include('header.html') ?>  -->
+	<?php include('header.html') ?>
     <title> Statistics </title>
     
     <link rel="stylesheet" type="text/css" href="style.css">
