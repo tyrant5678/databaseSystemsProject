@@ -46,6 +46,19 @@ if (isset($_POST['add_song_result'])) {
 	}
 	
 }
+// delete songs
+if (isset($_POST['delete_song'])) {
+	$delete_song_query = "DELETE FROM contains WHERE playlistID=\"{$_POST['playlist_id']}\" and songID=\"{$_POST['delete_song']}\"";
+	print_r($_POST);
+	echo($delete_song_query);
+	$delete_song_res = mysqli_query($conn, $delete_song_query);
+	try {
+		mysqli_query($conn, $delete_song_query);
+	}catch (PDOException $e) {
+		$delete_song_query = NULL;
+	}
+}
+
 if (isset($_POST['delete'])) {
 
 	$id = $_POST['playlist_to_delete'];
@@ -86,12 +99,15 @@ if (isset($_POST['delete'])) {
 		<tr>
 			<form action="Playlist_index2.php" method="post">
 				<td><?php echo $playlist_info['playlist_name']; ?></td>
-				<?php
-				foreach ($playlist_songs as $song) {
-					echo ("<p class=\"song\">{$song['name']} - {$song['artist_name']}</p>");
-				}
-				?>
 				<td>
+					<table>
+					<?php foreach ($playlist_songs as $song) : ?>
+						<tr>
+							<td><label for="delete_song" class="song"><?php echo("{$song['name']} - {$song['artist_name']}");?></label></td>
+							<td><button name="delete_song" id="delete_song" value="<?php echo("{$song['songID']}"); ?>" type="submit">ASD</button></td>
+						</tr>
+					<?php endforeach; ?>
+					</table>
 					<form action="Playlist_index2.php" method="post">
 
 						<input type="submit" value="View Stats" name="view_stats" class="btn btn-primary" title="Click to add songs to this playlist" />
@@ -104,7 +120,8 @@ if (isset($_POST['delete'])) {
 				</td>
 			</form>
 		</tr>
-	<?php endforeach; ?>
+	<?php endforeach; print_r($_POST);?>
+
 	<form method="POST">
 
 		<label>Add New Playlist:</label>
@@ -113,7 +130,12 @@ if (isset($_POST['delete'])) {
 		<input type="submit" value="Add" name="add">
 	</form>
 	<br>
-
+	<?php if (isset($delete_song_res)) {
+		echo("<script>alert(\"Successfully deleted song from playlist!\");</script>");
+	} else {
+		echo("<script>alert(\"Error deleting song from playlist, try again later.\");</script>");
+	}
+	?>
 	<?php include('footer.html') ?>
 
 </body>
