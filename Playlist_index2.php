@@ -73,6 +73,19 @@ if (isset($_POST['delete'])) {
 		echo '<script>alert("Playlist deleted successfully")</script>';
 	}
 }
+
+if (isset($_POST['rename'])) {
+        $id = $_POST['playlist_id'];
+	$name = mysqli_real_escape_string($conn, $_POST['playlist_rename']);
+
+	$sql_rename =
+		"UPDATE `playlist` SET `playlist_name` = '$name' WHERE `playlist`.`playlistID` = '$id'";
+
+	if (mysqli_query($conn, $sql_rename)) {
+		echo '<script>alert("Playlist renamed successfully")</script>';
+	}
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +118,7 @@ if (isset($_POST['delete'])) {
 					<?php foreach ($playlist_songs as $song) : ?>
 						<tr>
 							<td><label for="delete_song" class="song"><?php echo("{$song['name']} - {$song['artist_name']}");?></label></td>
-							<td><button name="delete_song" id="delete_song" value="<?php echo("{$song['songID']}"); ?>" type="submit">ASD</button></td>
+							<td><button name="delete_song" id="delete_song" value="<?php echo("{$song['songID']}"); ?>" type="submit">Delete</button></td>
 						</tr>
 					<?php endforeach; ?>
 					</table>
@@ -118,6 +131,10 @@ if (isset($_POST['delete'])) {
 						<input type="submit" value="Delete" name="delete" class="btn btn-danger" title="Click to delete  this playlist" />
 						<input type="hidden" name="playlist_to_delete" value="<?php echo $playlist_info['playlistID']; ?>" />
 						<input type="hidden" name="playlist_id" value="<?php echo $playlist_id?>"/>
+
+						<input type="text" name="playlist_rename">
+
+						<input type="submit" value="Rename Playlist" name="rename">
 				</td>
 			</form>
 		</tr>
