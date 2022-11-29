@@ -2,11 +2,11 @@
 
 $sname= "localhost:3306";
 
-$unmae= "joseph";
+$unmae= "root";
 
-$pass = "josephDBpass";
+$pass = "";
 
-$db_name = "statify2";
+$db_name = "statify";
 
 $conn = mysqli_connect($sname, $unmae, $pass, $db_name);
 

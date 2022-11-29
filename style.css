@@ -112,6 +112,11 @@ button:hover{
 
 }
 
+.song {
+    text-align: center;
+    color: white;
+}
+
 h1 {
 
     text-align: center;
@@ -173,7 +178,7 @@ nav {
 #mainMenu li {
     float: left;
   }
-  
+
 footer {
     position: fixed;
     bottom: 0px;
