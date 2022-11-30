@@ -19,8 +19,9 @@
     {
         $stats = NULL;
         $albumName = mysqli_real_escape_string($conn,$_POST['Album']);
-        $album_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence
-         FROM `album` NATURAL JOIN `part_of` NATURAL JOIN `song` WHERE album_name = '$albumName'";
+        $album_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence, genre
+         FROM `album` NATURAL JOIN `part_of` NATURAL JOIN `song` NATURAL JOIN `made` NATURAL JOIN `artist_genre`
+         WHERE album_name = '$albumName'";
         $stats = $conn->query($album_stat_sql);
     }
 
@@ -40,8 +41,8 @@
     {
         $stats = NULL;
         $artistName = mysqli_real_escape_string($conn,$_POST['Artist']);
-        $artist_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence
-         FROM `artist` NATURAL JOIN `made` NATURAL JOIN `album` NATURAL JOIN `part_of` NATURAL JOIN `song` 
+        $artist_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence, genre
+         FROM `artist` NATURAL JOIN `made` NATURAL JOIN `album` NATURAL JOIN `part_of` NATURAL JOIN `song` NATURAL JOIN `artist_genre`
          WHERE artist_name = '$artistName'";
         $stats = $conn->query($artist_stat_sql);   
     }
@@ -63,14 +64,10 @@
     {
         $stats = NULL;
         $playlistName = mysqli_real_escape_string($conn,$_POST['Playlist']);
-        $playlist_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence
-         FROM `playlist` NATURAL JOIN `contains` NATURAL JOIN `song` WHERE playlist_name = '$playlistName'";
+        $playlist_stat_sql = "SELECT name, duration, instrumentalness, loudness, danceability, tempo, energy, song_key, valence, genre
+         FROM `playlist` NATURAL JOIN `contains` NATURAL JOIN `song` NATURAL JOIN `part_of` NATURAL JOIN `made` NATURAL JOIN `artist_genre`
+         WHERE playlist_name = '$playlistName'";
         $stats = $conn->query($playlist_stat_sql);   
-
-        $averagestats = NULL;
-        $playlist_avg_sql = "SELECT AVG(duration), AVG(instrumentalness), AVG(loudness), AVG(danceability), AVG(tempo), AVG(energy), AVG(song_key), AVG(valence)
-         FROM `playlist` NATURAL JOIN `contains` NATURAL JOIN `song` WHERE playlist_name = '$playlistName'";
-        $averagestats = $conn->query($playlist_avg_sql);
     }
 
     if(isset($_POST['playlistavg']))
@@ -157,15 +154,16 @@
 <table class="w3-table w3-bordered w3-card-4 center" style="width:100%; background-color:#B0B0B0;">
   <thead>
   <tr style="background-color:#B0B0B0">
-    <th width="11%"><b>Song</b></th>
-    <th width="11%"><b>Duration</b></th>
-    <th width="11%"><b>Instrumentalness</b></th>        
-    <th width="11%"><b>Loudness</b></th> 
-    <th width="11%"><b>Danceability</b></th>
-    <th width="11%"><b>Tempo</b></th>
-    <th width="11%"><b>Energy</b></th> 
-    <th width="11%"><b>Key</b></th>
-    <th width="11%"><b>Valence</b></th>
+    <th width="10%"><b>Song</b></th>
+    <th width="10%"><b>Duration</b></th>
+    <th width="10%"><b>Instrumentalness</b></th>        
+    <th width="10%"><b>Loudness</b></th> 
+    <th width="10%"><b>Danceability</b></th>
+    <th width="10%"><b>Tempo</b></th>
+    <th width="10%"><b>Energy</b></th> 
+    <th width="10%"><b>Key</b></th>
+    <th width="10%"><b>Valence</b></th>
+    <th width="10%"><b>Genre</b></th>
   </tr>
   </thead>
     <?php foreach ($stats as $song): ?>
@@ -187,6 +185,7 @@
             <td style="text-align:center"><?php echo $song['energy']; ?></td>
             <td style="text-align:center"><?php echo $song['song_key']; ?></td>        
             <td style="text-align:center"><?php echo $song['valence']; ?></td>
+            <td style="text-align:center"><?php echo $song['genre']; ?></td>
         </tr>
     <?php endforeach; ?>
 </table>
