@@ -53,7 +53,7 @@ FROM song AS S,
     WHERE playlist_name = playlistName) as P
 WHERE S.duration = P.maxStat$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `maxDValenceAlbum` (IN `albumName` VARCHAR(50))   SELECT S.name, A.maxStat
+CREATE DEFINER=`root`@`localhost` PROCEDURE `maxValenceAlbum` (IN `albumName` VARCHAR(50))   SELECT S.name, A.maxStat
 FROM song AS S,
 	(SELECT name, MAX(song.valence) AS maxStat
 	FROM album NATURAL JOIN part_of NATURAL JOIN song

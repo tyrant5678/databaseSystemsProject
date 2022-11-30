@@ -125,11 +125,9 @@
         foreach ($metrics as $metric) {
             $result = [];
             $cap_metric = ucfirst($metric);
-            echo($_POST["Album"]);
             $albumName = mysqli_real_escape_string($conn,$_POST['Album']);
             $min_query = "CALL min{$cap_metric}Album(\"{$albumName}\")";
             $max_query = "CALL max{$cap_metric}Album(\"{$albumName}\")";
-            echo $min_query;
             $min_res = mysqli_query($conn, $min_query);
 
             foreach ($min_res as $row) {
@@ -156,7 +154,6 @@
 
             $extremes[$cap_metric] = $result;
         }
-        print_r($extremes);
     }
 ?>
 

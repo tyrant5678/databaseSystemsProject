@@ -1,2 +1,2 @@
-connect-db.php
-statify.sql
+./connect-db.php
+./statify.sql
