@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2022 at 11:59 PM
+-- Generation Time: Nov 30, 2022 at 05:43 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `statifyfinal`
+-- Database: `statify`
 --
 
 DELIMITER $$
@@ -424,6 +424,101 @@ INSERT INTO `artist_genre` (`artistID`, `genre`) VALUES
 ('4iHNK0tOyZPYnBU7nGAgpQ', 'urban contemporary'),
 ('1Xyo4u8uXC1ZmMpatF05PJ', 'canadian contemporary r&b'),
 ('1Xyo4u8uXC1ZmMpatF05PJ', 'canadian pop'),
+('1Xyo4u8uXC1ZmMpatF05PJ', 'pop'),
+('2h93pZq0e7k5yf4dywlkpM', 'hip hop'),
+('2h93pZq0e7k5yf4dywlkpM', 'lgbtq+ hip hop'),
+('2h93pZq0e7k5yf4dywlkpM', 'neo soul'),
+('2h93pZq0e7k5yf4dywlkpM', 'pop'),
+('0oSGxfWSnnOXhD2fKuz2Gy', 'art rock'),
+('0oSGxfWSnnOXhD2fKuz2Gy', 'classic rock'),
+('0oSGxfWSnnOXhD2fKuz2Gy', 'glam rock'),
+('0oSGxfWSnnOXhD2fKuz2Gy', 'permanent wave'),
+('0oSGxfWSnnOXhD2fKuz2Gy', 'rock'),
+('0qu422H5MOoQxGjd4IzHbS', 'alternative r&b'),
+('0qu422H5MOoQxGjd4IzHbS', 'art pop'),
+('0qu422H5MOoQxGjd4IzHbS', 'escape room'),
+('0qu422H5MOoQxGjd4IzHbS', 'experimental r&b'),
+('0SwO7SWeDHJijQ3XNS7xEE', 'alternative dance'),
+('0SwO7SWeDHJijQ3XNS7xEE', 'indietronica'),
+('0SwO7SWeDHJijQ3XNS7xEE', 'modern rock'),
+('0SwO7SWeDHJijQ3XNS7xEE', 'rock'),
+('3AA28KZvwAUcZuOKwyblJQ', 'alternative hip hop'),
+('3jOstUTkEu2JkjvRdBA5Gu', 'alternative rock'),
+('3jOstUTkEu2JkjvRdBA5Gu', 'modern power pop'),
+('3jOstUTkEu2JkjvRdBA5Gu', 'modern rock'),
+('3jOstUTkEu2JkjvRdBA5Gu', 'permanent wave'),
+('3jOstUTkEu2JkjvRdBA5Gu', 'rock'),
+('5BvJzeQpmsdsFp4HGUYUEx', ''),
+('0oSGxfWSnnOXhD2fKuz2Gy', 'art rock'),
+('0oSGxfWSnnOXhD2fKuz2Gy', 'classic rock'),
+('0oSGxfWSnnOXhD2fKuz2Gy', 'glam rock'),
+('0oSGxfWSnnOXhD2fKuz2Gy', 'permanent wave'),
+('0oSGxfWSnnOXhD2fKuz2Gy', 'rock'),
+('0qu422H5MOoQxGjd4IzHbS', 'alternative r&b'),
+('0qu422H5MOoQxGjd4IzHbS', 'art pop'),
+('0qu422H5MOoQxGjd4IzHbS', 'escape room'),
+('0qu422H5MOoQxGjd4IzHbS', 'experimental r&b'),
+('0SwO7SWeDHJijQ3XNS7xEE', 'alternative dance'),
+('0SwO7SWeDHJijQ3XNS7xEE', 'indietronica'),
+('0SwO7SWeDHJijQ3XNS7xEE', 'modern rock'),
+('0SwO7SWeDHJijQ3XNS7xEE', 'rock'),
+('3AA28KZvwAUcZuOKwyblJQ', 'alternative hip hop'),
+('3jOstUTkEu2JkjvRdBA5Gu', 'alternative rock'),
+('3jOstUTkEu2JkjvRdBA5Gu', 'modern power pop'),
+('3jOstUTkEu2JkjvRdBA5Gu', 'modern rock'),
+('3jOstUTkEu2JkjvRdBA5Gu', 'permanent wave'),
+('3jOstUTkEu2JkjvRdBA5Gu', 'rock'),
+('5BvJzeQpmsdsFp4HGUYUEx', 'baroque pop'),
+('5BvJzeQpmsdsFp4HGUYUEx', 'indie rock'),
+('5BvJzeQpmsdsFp4HGUYUEx', 'modern rock'),
+('5BvJzeQpmsdsFp4HGUYUEx', 'rock'),
+('6lcwlkAjBPSKnFBZjjZFJs', 'indie pop'),
+('6lcwlkAjBPSKnFBZjjZFJs', 'philly indie'),
+('6zvul52xwTWzilBZl6BUbT', 'alternative rock'),
+('6zvul52xwTWzilBZl6BUbT', 'boston rock'),
+('6zvul52xwTWzilBZl6BUbT', 'modern rock'),
+('6zvul52xwTWzilBZl6BUbT', 'permanent wave'),
+('6zvul52xwTWzilBZl6BUbT', 'rock'),
+('75mafsNqNE1WSEVxIKuY5C', 'bristol indie'),
+('75mafsNqNE1WSEVxIKuY5C', 'modern rock'),
+('3TVXtAsR1Inumwj472S9r4', 'canadian hip hop'),
+('3TVXtAsR1Inumwj472S9r4', 'canadian pop'),
+('3TVXtAsR1Inumwj472S9r4', 'hip hop'),
+('3TVXtAsR1Inumwj472S9r4', 'rap'),
+('3TVXtAsR1Inumwj472S9r4', 'toronto rap'),
+('06HL4z0CvFAxyc27GXpf02', 'pop'),
+('2wY79sveU1sp5g7SokKOiI', 'dance pop'),
+('2wY79sveU1sp5g7SokKOiI', 'pop'),
+('2wY79sveU1sp5g7SokKOiI', 'uk pop'),
+('57vWImR43h4CaDao012Ofp', 'afrofuturism'),
+('6KImCVD70vtIoJWnq6nGn3', 'pop'),
+('1Cs0zKBU1kc0i8ypK3B9ai', 'big room'),
+('1Cs0zKBU1kc0i8ypK3B9ai', 'dance pop'),
+('1Cs0zKBU1kc0i8ypK3B9ai', 'edm'),
+('5pKCCKE2ajJHZ9KAiaK11H', 'pop'),
+('5pKCCKE2ajJHZ9KAiaK11H', 'urban contemporary'),
+('0hCNtLu0JehylgoiP8L4Gh', 'hip hop'),
+('0hCNtLu0JehylgoiP8L4Gh', 'rap'),
+('0hCNtLu0JehylgoiP8L4Gh', 'pop'),
+('4oUHIQIBe0LHzYfvXNW4QM', 'contemporary country'),
+('246dkjvS1zLTtiykXe5h60', 'rap'),
+('246dkjvS1zLTtiykXe5h60', 'melodic rap'),
+('7bXgB6jMjp9ATFy66eO08Z', 'dance pop'),
+('7bXgB6jMjp9ATFy66eO08Z', 'pop'),
+('7bXgB6jMjp9ATFy66eO08Z', 'r&b'),
+('5cj0lLjcoR7YOSnhnX0Po5', 'dance pop'),
+('5cj0lLjcoR7YOSnhnX0Po5', 'pop'),
+('40ZNYROS4zLfyyBSs2PGe2', 'oklahoma country'),
+('6vWDO969PvNqNYHIOW5v0m', 'dance pop'),
+('6vWDO969PvNqNYHIOW5v0m', 'pop'),
+('6vWDO969PvNqNYHIOW5v0m', 'r&b'),
+('5Pwc4xIPtQLFEnJriah9YJ', 'piano rock'),
+('5Pwc4xIPtQLFEnJriah9YJ', 'pop'),
+('4iHNK0tOyZPYnBU7nGAgpQ', 'dance pop'),
+('4iHNK0tOyZPYnBU7nGAgpQ', 'pop'),
+('4iHNK0tOyZPYnBU7nGAgpQ', 'urban contemporary'),
+('1Xyo4u8uXC1ZmMpatF05PJ', 'canadian contemporary r&b'),
+('1Xyo4u8uXC1ZmMpatF05PJ', 'canadian pop'),
 ('1Xyo4u8uXC1ZmMpatF05PJ', 'pop');
 
 -- --------------------------------------------------------
@@ -442,6 +537,45 @@ CREATE TABLE `contains` (
 --
 
 INSERT INTO `contains` (`playlistID`, `songID`) VALUES
+('1', '17yrCsl1Ai6CZLBmGj6d6p'),
+('1', '19YKaevk2bce4odJkP5L22'),
+('1', '1BViPjTT585XAhkUUrkts0'),
+('1', '1IdZvb2XK8NmsovQlV6CPn'),
+('1', '1VZLEW5ZfcAbKZ94XQiSZF'),
+('1', '2JUqYobT8NvARdPmc4ES2x'),
+('1', '2LMkwUfqC6S6s6qDVlEuzV'),
+('1', '2qtoRFCOEL1gRn5q9DJC7F'),
+('1', '2ZWlPOoWh0626oTaHrnl2a'),
+('1', '34xTFwjPQ1dC6uJmleno7x'),
+('1', '35xSkNIXi504fcEwz9USRB'),
+('1', '3xKsf9qdS1CyvXSMEid6g8'),
+('1', '4xR3MAscflQ262kMeiKshQ'),
+('1', '5GUYJTQap5F3RDQiCOJhrS'),
+('1', '5k8LB57xOq8UUNVaKWSqrf'),
+('1', '73D5hBkiVZkopZrmBZTBWf'),
+('1', '7eqoqGkKwgOaWNNHx90uEZ'),
+('2', '3FtYbEfBqAlGO46NUDQSAt'),
+('2', '46LX0sSwIU4GFLcj23ZfMA'),
+('2', '6EyRxPp1m7f4jHhLavfAdZ'),
+('2', '1ytYTPuKbW0NIXb2kgmSVq'),
+('2', '36zqSzaPzQWZYDCNm1klgY'),
+('2', '25Gp0MpGdvrs4hL1u4L2TF'),
+('2', '1595LW73XBxkRk2ciQOHfr'),
+('2', '7Jh1bpe76CNTCgdgAdBw4Z'),
+('2', '0d28khcov6AiegSCpG5TuT'),
+('2', '20Mof2MdzPJX1QfE8Ojdla'),
+('3', '2LMkwUfqC6S6s6qDVlEuzV'),
+('3', '1ytYTPuKbW0NIXb2kgmSVq'),
+('3', '35xSkNIXi504fcEwz9USRB'),
+('3', '20Mof2MdzPJX1QfE8Ojdla'),
+('3', '2ZWlPOoWh0626oTaHrnl2a'),
+('4', '7eqoqGkKwgOaWNNHx90uEZ'),
+('4', '25Gp0MpGdvrs4hL1u4L2TF'),
+('4', '3FtYbEfBqAlGO46NUDQSAt'),
+('4', '46LX0sSwIU4GFLcj23ZfMA'),
+('4', '1595LW73XBxkRk2ciQOHfr'),
+('4', '0d28khcov6AiegSCpG5TuT'),
+('4', '6EyRxPp1m7f4jHhLavfAdZ'),
 ('1', '17yrCsl1Ai6CZLBmGj6d6p'),
 ('1', '19YKaevk2bce4odJkP5L22'),
 ('1', '1BViPjTT585XAhkUUrkts0'),
@@ -729,8 +863,8 @@ CREATE TABLE `users` (
   `last_name` varchar(15) NOT NULL,
   `email` varchar(30) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(30) DEFAULT NULL
-) ;
+  `password` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -808,7 +942,7 @@ ALTER TABLE `playlist`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
