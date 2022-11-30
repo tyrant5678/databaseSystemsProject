@@ -1,10 +1,10 @@
 <?php
 
-$sname= "localhost:3306";
+$sname= "localhost";
 
-$unmae= "root";
+$unmae= "dev1";
 
-$pass = "";
+$pass = "password";
 
 $db_name = "statify";
 
@@ -15,5 +15,11 @@ if (!$conn) {
     echo "Connection failed!";
 
 }
+
+// if ($conn) {
+//     echo 'connected';
+//   } else {
+//     echo 'not connected';
+//   }
 
 ?>
