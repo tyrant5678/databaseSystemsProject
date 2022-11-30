@@ -77,7 +77,7 @@
         $playlist_avg_sql = "SELECT AVG(duration) as duration, AVG(instrumentalness) as instrumentalness, AVG(loudness) as loudness, 
          AVG(danceability) as danceability, AVG(tempo) as tempo, AVG(energy) as energy, AVG(song_key) as song_key, AVG(valence) as valence
          FROM `playlist` NATURAL JOIN `contains` NATURAL JOIN `song` WHERE playlist_name = '$playlistName'";
-        $stats = $conn->query($playlist_avg_sql);  
+        $stats = $conn->query($playlist_avg_sql);
     }
 ?>
 
@@ -166,26 +166,36 @@
     <th width="10%"><b>Genre</b></th>
   </tr>
   </thead>
-    <?php foreach ($stats as $song): ?>
+  <?php $displayed_songs = []; ?>
+    <?php foreach ($stats as $song) : ?>
         <tr>
             <?php
-                if ($song['name']){
+                if (isset($song['name'])){
                     $song_name = $song['name'];
                 }else{
                     $song_name = "AVERAGE";
                 }
 
+                if (isset($song['genre'])) {
+                    $song_genre = $song['genre'];
+                }else{
+                    $song_genre = "N/A";
+                }
+
             ?>
-            <td style="text-align:center"><?php echo $song_name; ?></td>
-            <td style="text-align:center"><?php echo $song['duration']; ?></td>        
-            <td style="text-align:center"><?php echo $song['instrumentalness']; ?></td>
-            <td style="text-align:center"><?php echo $song['loudness']; ?></td>
-            <td style="text-align:center"><?php echo $song['danceability']; ?></td>        
-            <td style="text-align:center"><?php echo $song['tempo']; ?></td>
-            <td style="text-align:center"><?php echo $song['energy']; ?></td>
-            <td style="text-align:center"><?php echo $song['song_key']; ?></td>        
-            <td style="text-align:center"><?php echo $song['valence']; ?></td>
-            <td style="text-align:center"><?php echo $song['genre']; ?></td>
+            <?php if (!isset($displayed_songs[$song_name])) : ?>
+                <?php $displayed_songs[$song_name] = 1; ?>
+                <td style="text-align:center"><?php echo $song_name; ?></td>
+                <td style="text-align:center"><?php echo $song['duration']; ?></td>        
+                <td style="text-align:center"><?php echo $song['instrumentalness']; ?></td>
+                <td style="text-align:center"><?php echo $song['loudness']; ?></td>
+                <td style="text-align:center"><?php echo $song['danceability']; ?></td>        
+                <td style="text-align:center"><?php echo $song['tempo']; ?></td>
+                <td style="text-align:center"><?php echo $song['energy']; ?></td>
+                <td style="text-align:center"><?php echo $song['song_key']; ?></td>        
+                <td style="text-align:center"><?php echo $song['valence']; ?></td>
+                <td style="text-align:center"><?php echo $song_genre; ?></td>
+            <?php endif ?>
         </tr>
     <?php endforeach; ?>
 </table>
