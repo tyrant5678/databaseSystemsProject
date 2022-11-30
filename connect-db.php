@@ -2,9 +2,9 @@
 
 $sname= "localhost:3306";
 
-$unmae= "ethan_a";
+$unmae= "root";
 
-$pass = "bayhawks79";
+$pass = "";
 
 $db_name = "statify";
 
