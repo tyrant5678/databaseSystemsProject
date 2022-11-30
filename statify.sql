@@ -383,7 +383,7 @@ CREATE TABLE `users` (
   `last_name` varchar(15) NOT NULL,
   `email` varchar(30) NOT NULL,
   `spotify_username` varchar(30) NOT NULL,
-  CONSTRAINT validEmail CHECK (`email` LIKE '_%@_%._%') 
+  CONSTRAINT validEmail CHECK (`email` LIKE '_%@_%._%')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

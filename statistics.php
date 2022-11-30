@@ -130,15 +130,15 @@
   </thead>
     <?php foreach ($stats as $song): ?>
         <tr>
-            <td style="text-align:center"><?php echo $song['name']; ?></td>
-            <td style="text-align:center"><?php echo $song['duration']; ?></td>        
-            <td style="text-align:center"><?php echo $song['instrumentalness']; ?></td>
-            <td style="text-align:center"><?php echo $song['loudness']; ?></td>
-            <td style="text-align:center"><?php echo $song['danceability']; ?></td>        
-            <td style="text-align:center"><?php echo $song['tempo']; ?></td>
-            <td style="text-align:center"><?php echo $song['energy']; ?></td>
-            <td style="text-align:center"><?php echo $song['song_key']; ?></td>        
-            <td style="text-align:center"><?php echo $song['valence']; ?></td>
+            <td style="text-align:center" class="song"><?php echo $song['name']; ?></td>
+            <td style="text-align:center" class="song"><?php echo $song['duration']; ?></td>        
+            <td style="text-align:center" class="song"><?php echo $song['instrumentalness']; ?></td>
+            <td style="text-align:center" class="song"><?php echo $song['loudness']; ?></td>
+            <td style="text-align:center" class="song"><?php echo $song['danceability']; ?></td>        
+            <td style="text-align:center" class="song"><?php echo $song['tempo']; ?></td>
+            <td style="text-align:center" class="song"><?php echo $song['energy']; ?></td>
+            <td style="text-align:center" class="song"><?php echo $song['song_key']; ?></td>        
+            <td style="text-align:center" class="song"><?php echo $song['valence']; ?></td>
         </tr>
     <?php endforeach; ?>
 </table>
