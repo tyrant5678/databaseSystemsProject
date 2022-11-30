@@ -14,6 +14,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 
 $username = validate($_POST['username']);
 $password = validate($_POST['password']);
+$hashed = password_verify($password, $row['password']);
 
 if(empty($username)) {
     header ("Location: index.php?error=Username is required");

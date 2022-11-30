@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // Connect to database (can put in db-connect file)
 require("connect-db.php");
 global $conn;
@@ -9,18 +9,24 @@ if (!$conn) {
 	echo "Connection failed!";
 }
 
+if (!isset($_SESSION['username'])) {
+	header("Location: index.php");
+}
 // specific function file
-$sql = "SELECT * FROM `playlist`";
-$all_playlists = mysqli_query($conn, $sql);
 if (isset($_POST['add'])) {
-
+	// insert into playlist
 	$name = mysqli_real_escape_string($conn, $_POST['playlist_name']);
-
 	$sql_insert =
 		"INSERT INTO `playlist`(`playlist_name`)
-			VALUES ('$name')";
+			VALUES ('$name');";
 
-	if (mysqli_query($conn, $sql_insert)) {
+	$res1 = mysqli_query($conn, $sql_insert);
+	// insert into owns
+	$playlist_id = $conn->insert_id;
+	$add_owns = "INSERT INTO `owns` VALUES ({$playlist_id}, {$_SESSION['id']})";
+	$res2 = mysqli_query($conn, $add_owns);
+
+	if ($res1 && $res2) {
 		echo '<script>alert("Playlist added successfully")</script>';
 	}
 	unset($_POST['add']);
@@ -77,6 +83,9 @@ if (isset($_POST['delete'])) {
 	$sql = "SELECT * FROM `playlist`";
 	$all_playlists = mysqli_query($conn, $sql);
 }
+$sql = "SELECT * FROM `playlist` NATURAL JOIN `owns` WHERE userID={$_SESSION['id']}";
+$all_playlists = mysqli_query($conn, $sql);
+echo($_SESSION['id']);
 
 if (isset($_POST['rename'])) {
         $id = $_POST['playlist_id'];
