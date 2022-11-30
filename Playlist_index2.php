@@ -30,6 +30,8 @@ if (isset($_POST['add'])) {
 		echo '<script>alert("Playlist added successfully")</script>';
 	}
 	unset($_POST['add']);
+	$sql = "SELECT * FROM `playlist`";
+	$all_playlists = mysqli_query($conn, $sql);
 }
 // redirect to add_songs page if we've got the form
 if (isset($_POST['add_songs'])) {
@@ -78,6 +80,8 @@ if (isset($_POST['delete'])) {
 	if (mysqli_query($conn, $sql_delete)) {
 		echo '<script>alert("Playlist deleted successfully")</script>';
 	}
+	$sql = "SELECT * FROM `playlist`";
+	$all_playlists = mysqli_query($conn, $sql);
 }
 $sql = "SELECT * FROM `playlist` NATURAL JOIN `owns` WHERE userID={$_SESSION['id']}";
 $all_playlists = mysqli_query($conn, $sql);
@@ -93,6 +97,8 @@ if (isset($_POST['rename'])) {
 	if (mysqli_query($conn, $sql_rename)) {
 		echo '<script>alert("Playlist renamed successfully")</script>';
 	}
+	$sql = "SELECT * FROM `playlist`";
+	$all_playlists = mysqli_query($conn, $sql);
 }
 
 ?>
@@ -133,8 +139,6 @@ if (isset($_POST['rename'])) {
 					</table>
 					<form action="Playlist_index2.php" method="post">
 
-						<input type="submit" value="View Stats" name="view_stats" class="btn btn-primary" title="Click to add songs to this playlist" />
-
 						<input type="submit" value="Add Songs" name="add_songs" class="btn btn-primary" title="Click to add songs to this playlist" />
 
 						<input type="submit" value="Delete" name="delete" class="btn btn-danger" title="Click to delete  this playlist" />
@@ -152,7 +156,7 @@ if (isset($_POST['rename'])) {
 	<form method="POST">
 
 		<label>Add New Playlist:</label>
-		<input type="text" name="playlist_name"><br>
+		<input type="text" name="playlist_name">
 
 		<input type="submit" value="Add" name="add">
 	</form>
