@@ -30,8 +30,6 @@ if (isset($_POST['add'])) {
 		echo '<script>alert("Playlist added successfully")</script>';
 	}
 	unset($_POST['add']);
-	$sql = "SELECT * FROM `playlist`";
-	$all_playlists = mysqli_query($conn, $sql);
 }
 // redirect to add_songs page if we've got the form
 if (isset($_POST['add_songs'])) {
@@ -80,8 +78,6 @@ if (isset($_POST['delete'])) {
 	if (mysqli_query($conn, $sql_delete)) {
 		echo '<script>alert("Playlist deleted successfully")</script>';
 	}
-	$sql = "SELECT * FROM `playlist`";
-	$all_playlists = mysqli_query($conn, $sql);
 }
 $sql = "SELECT * FROM `playlist` NATURAL JOIN `owns` WHERE userID={$_SESSION['id']}";
 $all_playlists = mysqli_query($conn, $sql);
@@ -97,9 +93,10 @@ if (isset($_POST['rename'])) {
 	if (mysqli_query($conn, $sql_rename)) {
 		echo '<script>alert("Playlist renamed successfully")</script>';
 	}
-	$sql = "SELECT * FROM `playlist`";
-	$all_playlists = mysqli_query($conn, $sql);
 }
+
+$sql = "SELECT * FROM `playlist` NATURAL JOIN `owns` WHERE userID={$_SESSION['id']}";
+$all_playlists = mysqli_query($conn, $sql);
 
 ?>
 
