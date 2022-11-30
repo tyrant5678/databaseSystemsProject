@@ -79,6 +79,85 @@
          FROM `playlist` NATURAL JOIN `contains` NATURAL JOIN `song` WHERE playlist_name = '$playlistName'";
         $stats = $conn->query($playlist_avg_sql);
     }
+
+    // call stored procedures to get max/min for playlists and albums
+    if (isset($_POST['playliststat']) || isset($_POST['playlistavg'])) {
+        $do_extremes = TRUE;
+        $extremes = [];
+        $metrics = ["danceability", "duration", "energy", "instrumentalness", "loudness", "tempo", "valence"];
+        foreach ($metrics as $metric) {
+            $result = [];
+            $cap_metric = ucfirst($metric);
+            $playlistName = mysqli_real_escape_string($conn,$_POST['Playlist']);
+            $min_query = "CALL min{$cap_metric}Playlist(\"{$playlistName}\")";
+            $max_query = "CALL max{$cap_metric}Playlist(\"{$playlistName}\")";
+
+            $min_res = mysqli_query($conn, $min_query);
+
+            foreach ($min_res as $row) {
+                $to_push = [$row['name'], $row['minStat']];
+            }
+
+            mysqli_free_result($min_res);
+            mysqli_next_result($conn);
+
+            array_push($result, $to_push[0]);
+            array_push($result, $to_push[1]);
+
+            $max_res = mysqli_query($conn, $max_query);
+
+            foreach ($max_res as $row) {
+                $to_push = [$row['name'], $row['maxStat']];
+            }
+
+            mysqli_free_result($max_res);
+            mysqli_next_result($conn);
+
+            array_push($result, $to_push[0]);
+            array_push($result, $to_push[1]);
+
+            $extremes[$cap_metric] = $result;
+        }
+    }else if (isset($_POST['albumstat']) || isset($_POST['albumavg'])) {
+        $do_extremes = TRUE;
+        $extremes = [];
+        $metrics = ["danceability", "duration", "energy", "instrumentalness", "loudness", "tempo", "valence"];
+        foreach ($metrics as $metric) {
+            $result = [];
+            $cap_metric = ucfirst($metric);
+            echo($_POST["Album"]);
+            $albumName = mysqli_real_escape_string($conn,$_POST['Album']);
+            $min_query = "CALL min{$cap_metric}Album(\"{$albumName}\")";
+            $max_query = "CALL max{$cap_metric}Album(\"{$albumName}\")";
+            echo $min_query;
+            $min_res = mysqli_query($conn, $min_query);
+
+            foreach ($min_res as $row) {
+                $to_push = [$row['name'], $row['minStat']];
+            }
+
+            mysqli_free_result($min_res);
+            mysqli_next_result($conn);
+
+            array_push($result, $to_push[0]);
+            array_push($result, $to_push[1]);
+
+            $max_res = mysqli_query($conn, $max_query);
+
+            foreach ($max_res as $row) {
+                $to_push = [$row['name'], $row['maxStat']];
+            }
+
+            mysqli_free_result($max_res);
+            mysqli_next_result($conn);
+
+            array_push($result, $to_push[0]);
+            array_push($result, $to_push[1]);
+
+            $extremes[$cap_metric] = $result;
+        }
+        print_r($extremes);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -151,6 +230,28 @@
 <hr/>
 <h3 style="color:white;">Statistics</h3>
 <div class="row justify-content-center">  
+<?php if (isset($do_extremes)) : ?>
+<table class="w3-table w3-bordered w3-card-4 center" style="width:100%; background-color:#B0B0B0;">
+    <thead>
+        <tr style="background-color:#B0B0B0">
+            <th width="20%"><b>Song</b></th>
+            <th width="20%"><b>Minimum Song</b></th>
+            <th width="20%"><b>Minimum Value</b></th>
+            <th width="20%"><b>Maximum Song</b></th>
+            <th width="20%"><b>Maximum Value</b></th>
+        </tr>
+        <?php foreach ($extremes as $metric=>$values) : ?>
+            <tr></tr>
+                <td width="20%" style="text-align:center"><?php echo $metric ?></td>
+                <td width="20%" style="text-align:center"><?php echo $values[0] ?></td>
+                <td width="20%" style="text-align:center"><?php echo $values[1] ?></td>
+                <td width="20%" style="text-align:center"><?php echo $values[2] ?></td>
+                <td width="20%" style="text-align:center"><?php echo $values[3] ?></td>
+            </tr>
+        <?php endforeach ?>
+    </thead>
+</table>
+<?php endif ?>
 <table class="w3-table w3-bordered w3-card-4 center" style="width:100%; background-color:#B0B0B0;">
   <thead>
   <tr style="background-color:#B0B0B0">
