@@ -25,7 +25,7 @@ if (isset($_GET['playlist_id'])) {
     <form action="Playlist_index2.php" method="post">
      <h3>Add Song:</h3>
       Available Songs:
-      <select name="Song">
+      <select name="song_name">
        <option value="none">
         <?php echo "";?>
        </option>
@@ -36,8 +36,8 @@ if (isset($_GET['playlist_id'])) {
       <?php endforeach; ?>
       </select>
     
-        <label for="song_name">Type Song from List to Add</label>
-        <input type="text" name="song_name" id="song_name"/>
+        <!-- <label for="song_name">Type Song from List to Add</label>
+        <input type="text" name="song_name" id="song_name"/> -->
         <input type="submit" name="add_song_result" value="Add This Song">
         <input type="hidden" name="playlist_id" value="<?php echo "{$playlist_id}"?>"/>
     </form>
